@@ -7,7 +7,7 @@
 
         <title>Tapp</title>
 
-        
+        <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="https://chayns-res.tobit.com/API/V3.1/css/chayns.min.css">
         <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
@@ -20,27 +20,30 @@
 
             <div class="tapp__content">
                 <div class="content__card">
-                    <div class="accordion">
+                    <div class="accordion" id="siteAddForm">
                         <div class="accordion__head">Füge deine Chayns-Site der Suche hinzu</div>
                         <div class="accordion__body">
                             <div class="accordion__content">
-                                <input class="input" type="text" placeholder="Name" required>
-                                <input class="input" type="text" placeholder="Adresse" required>
+                                <input class="input" type="text" placeholder="Name der Site" required>
+                                <input class="input" type="text" placeholder="Web-Adresse" required>
                                 <input class="input" type="text" placeholder="eMail" required>
-                                <textarea class="input" type="text" placeholder="Kommentar (optional)"></textarea>
-                                <div class="button">Abschicken</div>
+                                <textarea class="input" type="text" placeholder="Kommentar (optional)" autogrow></textarea>
+                                <div class="center">
+                                    <div class="button">Abschicken</div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
 
                     <div class="Suche">
-                        <input placeholder="suchen" value="" type="text">
+                        <input class="input" placeholder="Suchen" value="" type="text">
                         <label>
                             <i class="fa fa-search"></i>
                         </label>
                     </div>
 
-                    <div class="SearchResultBox">
+                    <div id="SearchResultBox">
                         <div class="ListItem ListItem--clickable">
                             <div class="ListItem__head">
                                 <div class="ListItem__Image">
@@ -53,7 +56,7 @@
                             </div>
                         </div>
                         <div class="ListItem ListItem--clickable">
-                            <div class="ListItem_head">
+                            <div class="ListItem__head">
                                 <div class="ListItem__Image">        
                                     <img src="https://tapp01.tobit.com/content/design/Designguide/chayns_design_guide/chayns_icon.png">                      
                                 </div>
@@ -74,9 +77,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="right"><a href="#">Mehr anzeigen</a></div>
+                        <div class="right">
+                            <a href="#">Mehr anzeigen</a>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
