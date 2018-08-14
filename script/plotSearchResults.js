@@ -1,32 +1,36 @@
 (function (plotSearchResults, chayns, window, undefined) {
  
     'use strict';
+
+    var displayTarget;
  
-    plotSearchResults.init = function init(searchData, displayTarget) {
-        _iterateOverJSON(searchData, displayTarget);
+    plotSearchResults.init = function init(pDisplayTarget) {
+        displayTarget = pDisplayTarget;
     };
 
-    function _iterateOverJSON(searchData, displayTarget) {
-        _clearResultBox(displayTarget);
+    plotSearchResults.displayResults = function displayResults(searchData, newSearch) {
+        if (newSearch) {
+            _clearResultBox();
+        }
         console.log(searchData);
         if (searchData.ResultCode === 0) {
             var searchResults = searchData.Data;
             var numberOfResults = searchResults.length;
             for (var i = 0; i < numberOfResults; i++) {
                 var itemData = searchResults[i];
-                _addToResultBox(itemData, displayTarget);
+                _addToResultBox(itemData);
             }
         }
         else {
-            //_errorMessage(displayTarget);
+            //_errorMessage();
         }      
     }
 
-    function _addToResultBox(itemData, displayTarget) {
+    function _addToResultBox(itemData) {
         displayTarget.innerHTML += _siteDataToHTML(itemData);
     }
 
-    function _clearResultBox(displayTarget) {
+    function _clearResultBox() {
         displayTarget.innerHTML = '';
     }
  
@@ -56,7 +60,7 @@
         return listItem;
     }
 
-    function _errorMessage(displayTarget) {
+    function _errorMessage() {
         displayTarget.innerHTML = 'Keine Seiten für diesen Suchbegriff'
     }
  
