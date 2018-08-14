@@ -1,34 +1,22 @@
-(function (retrieveChaynsSites, chayns, window, undefined) {
+(function (retrieveJSON, chayns, window, undefined) {
  
     'use strict';
  
-    retrieveChaynsSites.init = function init(url, callback) {
-        _fetchJSON(url, callback);
+    retrieveJSON.init = function init(url) {
+        return _fetchJSON(url);
     };
 
-    function _fetchJSON(url, callback) {
-        fetch(url)
-        .then(_validateResponse)
-        .then(_readResponseAsJSON)
-        .then(function(json) {
-            callback(json);
-        })
-        .catch(_logError);
+    function _fetchJSON(url) {
+        return new Promise(function(resolve, reject) {
+            try {
+                fetch(url).then(function(data) {
+                    resolve(data.json());
+                });
+            }
+            catch {
+                reject(error);
+            }
+        });  
     }
-
-    function _validateResponse(response) {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response;
-    }
-
-    function _readResponseAsJSON(response) {
-        return response.json();
-    } 
-      
-    function _logError(error) {
-        console.log('Error: \n', error);
-    }  
  
-})((window.retrieveChaynsSites = {}), chayns, window);
+})((window.retrieveJSON = {}), chayns, window);

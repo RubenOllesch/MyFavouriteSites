@@ -1,20 +1,33 @@
 'use strict';
 
 const searchResultBox = document.querySelector('#SearchResultBox');
-const searchURL = 'https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=love&Skip=0&Take=50';
+const searchInput = document.querySelector('#searchInput');
+const showMoreButton = document.querySelector('#showMoreButton');
+const MAX_RESULTS = 10;
+var skipResults = 0;
 
 //Sets up the Tapp
 chayns.ready.then(function () {
+    searchHandler.init(searchResultBox);
     addFormHandler();
     addEventListeners();
 });
 
 function addEventListeners() {
-    document.querySelector('#searchSiteInput').addEventListener('input', function() {
-        retrieveChaynsSites.init(searchURL, displayResults);
+    searchInput.addEventListener('input', function() {
+        var searchString = searchInput.value;
+        var searchURL = 'https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=' + searchString + '&Skip=' + skipResults + '&Take=' + MAX_RESULTS;
+
+        var searchData = retrieveJSON.init(searchURL)
+        searchData.then(function(data){
+            plotSearchResults.init(data, searchResultBox)
+        })
+        .catch(function(error){
+            console.log(error);
+        });
     });
 
-    document.querySelector('#showMoreButton').addEventListener('click', function() {
+    showMoreButton.addEventListener('click', function() {
         showMore();
     });
 }

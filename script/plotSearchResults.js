@@ -1,22 +1,25 @@
 (function (plotSearchResults, chayns, window, undefined) {
  
     'use strict';
-
-    const MAX_RESULTS = 10;
  
     plotSearchResults.init = function init(searchData, displayTarget) {
         _iterateOverJSON(searchData, displayTarget);
     };
 
     function _iterateOverJSON(searchData, displayTarget) {
-        _clearResultBox();
-        var searchResults = searchData.Data;
-        console.log(searchResults);
-        var size = Math.min(searchResults.length, MAX_RESULTS)
-        for (var i = 0; i < size; i++) {
-            var itemData = searchResults[i];
-            _addToResultBox(itemData, displayTarget);
+        _clearResultBox(displayTarget);
+        console.log(searchData);
+        if (searchData.ResultCode === 0) {
+            var searchResults = searchData.Data;
+            var numberOfResults = searchResults.length;
+            for (var i = 0; i < numberOfResults; i++) {
+                var itemData = searchResults[i];
+                _addToResultBox(itemData, displayTarget);
+            }
         }
+        else {
+            //_errorMessage(displayTarget);
+        }      
     }
 
     function _addToResultBox(itemData, displayTarget) {
@@ -28,15 +31,16 @@
     }
  
     function _siteDataToHTML(siteData) {
-        var imgURL = 'https://chayns.tobit.com/storage/72418-10719/Images/icon-72.png?_=1534157532';
+        var siteURL = 'https://chayns.net/' + siteData.siteId + '/aboutus';
+        var iconURL = 'https://sub60.tobit.com/l/' + siteData.locationId;
         var headline = siteData.appstoreName;
         var description = 'Sample Text';
         var listItem = 
 
-                '<div class="ListItem ListItem--clickable">'
+                '<div class="ListItem ListItem--clickable"  onclick="chayns.openUrlInBrowser(\'' + siteURL + '\');">'
             +       '<div class="ListItem__head">'
             +           '<div class="ListItem__Image">'        
-            +               '<img src="' + imgURL + '">'                      
+            +               '<img src="' + iconURL + '">'                      
             +           '</div>'
             +           '<div class="ListItem__Title">'
             +               '<p class="ListItem__Title--headline">'
@@ -50,6 +54,10 @@
             +   '</div>';
 
         return listItem;
+    }
+
+    function _errorMessage(displayTarget) {
+        displayTarget.innerHTML = 'Keine Seiten für diesen Suchbegriff'
     }
  
 })((window.plotSearchResults = {}), chayns, window);
