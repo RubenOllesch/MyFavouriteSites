@@ -28,7 +28,7 @@
                             <input class="input" id="mailForSite" type="text" placeholder="eMail" required>
                             <textarea class="input" id="commentForSite" type="text" placeholder="Kommentar (optional)" autogrow></textarea>
                             <div class="center">
-                                <div class="button" id="sendFormButton">Hinzufügen</div>
+                                <div class="button" id="formSendButton">Hinzufügen</div>
                             </div>
 
                         </div>
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="Suche Suche--accordion">
-                            <input class="input" id="searchSiteInput" placeholder="Suche" type="text">
+                            <input class="input" id="searchInput" placeholder="Suche" type="text">
                             <label>
                                 <i class="fa fa-search"></i>
                             </label>
@@ -50,48 +50,14 @@
                     </div>
                     <div class="accordion__body">
                         <div id="SearchResultBox">
-                            <div class="ListItem ListItem--clickable">
-                                <div class="ListItem__head">
-                                    <div class="ListItem__Image">
-                                        <img src="https://chayns.tobit.com/storage/64944-20536/Images/icon-72.png?_=1534157450">
-                                    </div>
-                                    <div class="ListItem__Title">
-                                        <p class="ListItem__Title--headline">
-                                            I love my French Bulldog
-                                        </p>
-                                        <p class="ListItem__Title--description">
-                                            Die Seite ist für Besitzer & Liebhaber französischer BulldoggenShare ✔ Like ✔ Tag ✔
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ListItem ListItem--clickable">
-                                <div class="ListItem__head">
-                                    <div class="ListItem__Image">        
-                                        <img src="https://chayns.tobit.com/storage/72418-10719/Images/icon-72.png?_=1534157532">                      
-                                    </div>
-                                    <div class="ListItem__Title">
-                                        <p class="ListItem__Title--headline">Digital Lovers</p>
-                                        <p class="ListItem__Title--description">
-                                            Hier entsteht eine kleine Website für alle Digital Lovers.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ListItem ListItem--clickable">
-                                <div class="ListItem__head">
-                                    <div class="ListItem__Image">        
-                                        <img src="https://chayns.tobit.com/storage/73137-24872/Images/icon-72.png?_=1534157675">                      
-                                    </div>
-                                    <div class="ListItem__Title">
-                                        <p class="ListItem__Title--headline">roundit</p>
-                                        <p class="ListItem__Title--description">... all all aroundIT. We love IT, we live IT!</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="right">
-                                <a id="showMoreButton" href="#">Mehr anzeigen</a>
-                            </div>
+
+
+                            <!--Search results will be displayed here as ListItems -->
+
+
+                        </div>
+                        <div class="right">
+                            <a id="showMoreButton" href="#">Mehr anzeigen</a>
                         </div>
                     </div>
                 </div>
@@ -100,7 +66,9 @@
         <script src="https://chayns-res.tobit.com/API/V3.1/js/chayns.min.js"></script>
         <script src="script/main.js"></script>
         <script src="script/formHandler.js"></script>
-        <script src="script/retrieveSearchResults.js"></script>
+        <script src="script/retrieveJSON.js"></script>
         <script src="script/plotSearchResults.js"></script>
+        <script src="script/searchHandler.js"></script>
+        <script src="script/inputDelayer.js"></script>
     </body>
 </html>

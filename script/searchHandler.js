@@ -9,10 +9,10 @@
 
     searchHandler.init = function init(pDisplayTarget) {
         displayTarget = pDisplayTarget;   
-        plotSearchResults.init(pDisplayTarget);
     };
 
     searchHandler.search = function search(searchString, newSearch) {
+        document.body.style.cursor = 'progress';
         if (newSearch) {
             skipResults = 0;
         }
@@ -24,9 +24,11 @@
 
         var searchData = retrieveJSON.init(searchURL);
         searchData.then(function(data){
-            plotSearchResults.displayResults(data, newSearch)
+            plotSearchResults.displayResults(data, newSearch);
+            document.body.style.cursor = 'default';
         })
         .catch(function(error){
+            document.body.style.cursor = 'default';
             console.log(error);
         });
     }

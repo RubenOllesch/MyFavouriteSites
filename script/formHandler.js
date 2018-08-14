@@ -1,24 +1,27 @@
 (function (formHandler, chayns, window, undefined) {
  
     'use strict';
- 
-    formHandler.init = function init(inputFields, sendButton) {
-        _setupSendButton(inputFields, sendButton);
-    };
- 
-    function _setupSendButton(inputFields, sendButton) {
-        document.querySelector(sendButton).addEventListener('click', function() {
-            _sendForm(inputFields);
-        });
-    }
 
-    function _sendForm(inputFields) {
-        var jsonMessage = _getValues(inputFields);
+    var inputFields;
+    var sendButton;
+ 
+    formHandler.init = function init(pInputFields, pSendButton) {
+        inputFields = pInputFields;
+        sendButton = pSendButton;
+        sendButton.addEventListener('click', function() {
+            _sendForm();
+        });
+    };
+
+    function _sendForm() {
+        console.log('click');
+        
+        var jsonMessage = _getValues();
         console.log(jsonMessage);
         chayns.showWaitCursor();
         chayns.intercom.sendMessageToPage(jsonMessage)
         .then(function(data) {
-            _clearTextInputs(inputFields);
+            _clearTextInputs();
             chayns.hideWaitCursor();
             if(data.status === 200) {
                 chayns.dialog.alert('Danke für deine Beantragung');
@@ -27,7 +30,7 @@
     }
 
     //returns object with the values of the textinputs
-    function _getValues(inputFields) {
+    function _getValues() {
         var inputValues = {};
         var inputFieldNames = Object.keys(inputFields);
         var inputFieldIDs = Object.values(inputFields);
@@ -40,7 +43,7 @@
         return inputValues;
     }
 
-    function _clearTextInputs(inputFields) {
+    function _clearTextInputs() {
         var inputFieldIDs = Object.values(inputFields);
         for (var key in inputFields) {
             document.querySelector(inputFieldIDs[key]).value = '';

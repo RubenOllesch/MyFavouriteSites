@@ -10,27 +10,26 @@
 
     plotSearchResults.displayResults = function displayResults(searchData, newSearch) {
         if (newSearch) {
-            _clearResultBox();
+            _clearDisplay();
         }
-        console.log(searchData);
         if (searchData.ResultCode === 0) {
             var searchResults = searchData.Data;
             var numberOfResults = searchResults.length;
-            for (var i = 0; i < numberOfResults; i++) {
+            for (let i = 0; i < numberOfResults; i++) {
                 var itemData = searchResults[i];
-                _addToResultBox(itemData);
+                _addItemToDisplay(itemData);
             }
         }
         else {
-            //_errorMessage();
+            //_noResultsMessage();
         }      
     }
 
-    function _addToResultBox(itemData) {
+    function _addItemToDisplay(itemData) {
         displayTarget.innerHTML += _siteDataToHTML(itemData);
     }
 
-    function _clearResultBox() {
+    function _clearDisplay() {
         displayTarget.innerHTML = '';
     }
  
@@ -38,13 +37,13 @@
         var siteURL = 'https://chayns.net/' + siteData.siteId + '/aboutus';
         var iconURL = 'https://sub60.tobit.com/l/' + siteData.locationId;
         var headline = siteData.appstoreName;
-        var description = 'Sample Text';
+        var description = 'siteID: ' + siteData.siteId;
         var listItem = 
 
                 '<div class="ListItem ListItem--clickable"  onclick="chayns.openUrlInBrowser(\'' + siteURL + '\');">'
             +       '<div class="ListItem__head">'
             +           '<div class="ListItem__Image">'        
-            +               '<img src="' + iconURL + '">'                      
+            +               '<img style="background-image: url(\'' + iconURL + '\')">'                      
             +           '</div>'
             +           '<div class="ListItem__Title">'
             +               '<p class="ListItem__Title--headline">'
@@ -60,7 +59,7 @@
         return listItem;
     }
 
-    function _errorMessage() {
+    function _noResultsMessage() {
         displayTarget.innerHTML = 'Keine Seiten für diesen Suchbegriff'
     }
  
